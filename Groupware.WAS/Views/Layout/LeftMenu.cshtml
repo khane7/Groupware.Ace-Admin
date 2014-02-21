@@ -1,0 +1,99 @@
+﻿@{
+	ViewBag.PageTitle = "LeftMenu";
+}
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search">
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+                <!-- /input-group -->
+            </li>
+
+			@{
+				var status = 0;
+				var prev_level = 1;
+				var currentUrl = HttpContext.Current.Request.Url.AbsolutePath;
+				
+				foreach (var item in ViewBag.listTree)
+				{
+					var curr_level = item.tree_level;
+
+					if (prev_level < curr_level)
+					{
+						if (item.tree_level == 2)
+						{
+							@Html.Raw("<ul class=\"nav nav-second-level in\">");
+						}
+						if (item.tree_level == 3)
+						{
+							@Html.Raw("<ul class=\"nav nav-third-level in\">");
+						}
+					}
+					else if (prev_level > curr_level)
+					{
+						@Html.Raw("</li>");
+						@Html.Raw("</ul>");
+						@Html.Raw("</li>");
+					}
+					else if (status != 0 && prev_level == curr_level)
+					{
+						@Html.Raw("</li>");
+					}
+					@Html.Raw("<li>");
+							<a href="@item.tree_value"><i class="fa @item.html_class fa-fw"></i> @item.tree_key
+								@if ( @item.tree_value == "#") {
+									<span class="fa arrow"></span>
+								}
+							</a>
+					prev_level = curr_level;
+					status++;
+				}
+				@Html.Raw("</li>");
+			}
+
+@*            
+			<li>
+                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#">Second Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Second Level Item</a>
+                    </li>
+                    <li>
+                        <a href="#">Third Level <span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="#">Third Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Third Level Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+			</li>
+*@
+
+
+        </ul>
+        <!-- /#side-menu -->
+    </div>
+    <!-- /.sidebar-collapse -->
+</nav>
+<!-- /.navbar-static-side -->

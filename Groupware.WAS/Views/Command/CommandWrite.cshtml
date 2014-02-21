@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "CommandWrite";
+	
+}
+
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+	});
+
+	var regist = function () {
+		syncContent();
+
+		if ($('#subject').val() == "") {
+			showAlert("Validate", "Subject is Empty", false);
+			return false;
+		}
+		if ($('#name').val() == "") {
+			showAlert("Validate", "Writer's Name is Empty", false);
+			return false;
+		}
+
+		goProcess("/Command/Save", "frm", "saveCommand(data)");
+	}
+
+	var saveCommand = function (data) {
+		goPage("/Command/");
+	}
+
+</script>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @ViewBag.PanelTitle
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+
+
+				<form id="frm" name="frm" method="post">
+				<input type="hidden" id="idx" name="idx" value="@ViewBag.command.idx" />
+
+				<div class="form-group">
+					<label>command type</label>
+					@{
+						Html.RenderAction("StatusList", "Code", new RouteValueDictionary { { "tree_type", "status" }, { "tree_level", 2 }, { "tree_value", @ViewBag.command.ord_type } });
+					}
+				</div>
+				<div class="form-group">
+					<label>subject</label>
+					<input class="form-control" placeholder="Enter Subject" id="subject" name="subject"  value="@ViewBag.command.subject">
+				</div>
+				<div class="form-group">
+					<label>writer</label>
+					<input class="form-control" placeholder="Enter Writer's Name" id="ord_emp_no" name="ord_emp_no" value="@Session["name"]"  value="@ViewBag.command.ord_emp_name">
+				</div>
+				<div class="form-group">
+					<label>receives</label>
+					<button class="btn btn-primary" id="btn-receives" type="button" >selecting</button>
+				</div>
+				<div class="form-group">
+                    <label>Content</label>
+					@{
+						Html.RenderAction("Index", "Editor", new RouteValueDictionary { { "content", @ViewBag.command.content} });
+					}
+                    @*<textarea class="form-control" rows="15" id="content" name="content"></textarea>*@
+                </div>
+
+				<div style="text-align: right;">
+					<button class="btn btn-primary" id="btn-save" type="button" onclick="javascript:regist();">Save</button>
+					<button class="btn btn-default" id="btn-cancel" type="button" onclick="javascript:goBack();">Cancel</button>
+				</div>
+
+				</form>
+
+
+			</div>
+		</div>
+	</div>
+</div>

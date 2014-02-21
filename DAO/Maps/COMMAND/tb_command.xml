@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="COMMAND" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<statements>
+
+		<select id="COMMAND.select_command_list" resultClass="CCommand" remapResults="true" parameterClass="System.Collections.Specialized.HybridDictionary">
+			SELECT
+				A.*,
+				T.*
+			FROM
+				tb_command AS A
+				LEFT JOIN tb_command_emp AS B ON (A.idx = B.p_idx)
+				LEFT JOIN tb_comment AS C ON ( A.tb_name = C.tb_name AND A.idx = C.tb_idx)
+				LEFT JOIN tb_code AS T ON ( T.tree_type = 'status' AND T.tree_value = A.ord_type)
+			<dynamic prepend="WHERE">
+			
+				<isNotNull property="search_value" prepend="AND">
+					$search_key$ = #search_value#
+				</isNotNull>
+				<isNotNull property="ord_emp_no" prepend="AND">
+					A.ord_emp_no = #ord_emp_no#
+				</isNotNull>
+				<isNotNull property="receive_emp_no" prepend="AND">
+					B.receive_emp_no = #receive_emp_no#
+				</isNotNull>
+
+			</dynamic>
+			ORDER BY
+				A.mod_date DESC
+			<isNotNull property="limit">
+			LIMIT $start$, $limit$
+			</isNotNull>
+		</select>
+
+
+		<select id="COMMAND.select_command_count" resultClass="System.Int32" parameterClass="System.Collections.Specialized.HybridDictionary">
+			SELECT
+				COUNT(*)
+			FROM
+				tb_command AS A
+				LEFT JOIN tb_command_emp AS B ON (A.idx = B.p_idx)
+				LEFT JOIN tb_comment AS C ON ( A.tb_name = C.tb_name AND A.idx = C.tb_idx)
+				LEFT JOIN tb_code AS T ON ( T.tree_type = 'status' AND T.tree_value = A.ord_type)
+			<dynamic prepend="WHERE">
+			
+				<isNotNull property="search_value">
+					$search_key$ = #search_value#
+				</isNotNull>
+				<isNotNull property="ord_emp_no">
+					A.ord_emp_no = #ord_emp_no#
+				</isNotNull>
+				<isNotNull property="receive_emp_no">
+					B.receive_emp_no = #receive_emp_no#
+				</isNotNull>
+
+			</dynamic>
+		</select>
+
+		<select id="COMMAND.select_command_one" resultClass="CCommand" parameterClass="System.Int32">
+			SELECT
+				A.*,
+				T.*
+			FROM
+				tb_command AS A
+				LEFT JOIN tb_code AS T ON ( T.tree_type = 'status' AND T.tree_value = A.ord_type)
+			WHERE
+				A.idx = #idx#
+			ORDER BY
+			A.mod_date DESC
+		</select>
+
+
+		<insert id="COMMAND.insert_command" parameterClass="CCommand">
+			INSERT INTO tb_command
+			(
+				tb_name,
+				tb_idx,
+				ord_type,
+				ord_emp_no,
+				ord_emp_name,
+				subject,
+				content,
+				reg_ip,
+				hit,
+				reg_date,
+				mod_date
+			)
+			VALUES
+			(
+				#tb_name#,
+				#tb_idx#,
+				#ord_type#,
+				#ord_emp_no#,
+				#ord_emp_name#,
+				#subject#,
+				#content#,
+				#reg_ip#,
+				#hit#,
+				#reg_date#,
+				#mod_date#
+			)
+		</insert>
+
+
+		<update id="COMMAND.update_command" parameterClass="CCommand">
+			UPDATE
+				tb_command
+			SET
+				tb_name = #tb_name#,
+				tb_idx = #tb_idx#,
+				ord_type = #ord_type#,
+				subject = #subject#,
+				content = #content#,
+				reg_ip = #reg_ip#,
+				mod_date = #mod_date#
+			WHERE
+				idx = #idx#
+		</update>
+
+		
+		<delete id="COMMAND.delete_command" parameterClass="System.Int32">
+			DELETE FROM 
+				tb_command
+			WHERE
+				idx = #idx#
+		</delete>
+		
+	</statements>
+</sqlMap>

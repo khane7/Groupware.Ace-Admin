@@ -1,0 +1,40 @@
+﻿@{
+	var listStatus = ViewBag.listCode;
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		$('button[name=btn-status]').click(function () {
+			$('button[name=btn-status]').each(function () {
+				$(this).removeClass("active");
+			});
+
+			$(this).addClass("active");
+			$('#tree_value').val($(this).val());
+		});
+
+		if ($('#tree_value').val() == "") {
+			$('#btn-status-share').trigger("click");
+		} else {
+			$('#btn-status-' + $('#tree_value').val()).trigger("click");
+		}
+
+	});
+
+</script>
+
+<p>
+	@foreach (var item in listStatus)
+	 {
+		<button id="btn-status-@item.tree_value" name="btn-status" class="btn btn-outline btn-@item.html_class" type="button" value="@item.tree_value" >@item.tree_key</button> 
+	 }
+	<input type="hidden" id="tree_value" name="tree_value" value="@ViewBag.tree_value" />
+@*    <button class="btn btn-outline btn-default" type="button">Default</button>
+    <button class="btn btn-outline btn-primary" type="button">Primary</button>
+    <button class="btn btn-outline btn-success" type="button">Success</button>
+    <button class="btn btn-outline btn-info" type="button">Info</button>
+    <button class="btn btn-outline btn-warning" type="button">Warning</button>
+    <button class="btn btn-outline btn-danger" type="button">Danger</button>*@
+</p>

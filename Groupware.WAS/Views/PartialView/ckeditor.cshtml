@@ -1,0 +1,37 @@
+﻿@Scripts.Render("~/Content/ckeditor/ckeditor.js")
+
+<script type="text/javascript">
+
+	var syncContent = function () {
+		$('#content').val(CKEDITOR.instances.contents.getData());
+	}
+</script>
+
+<textarea id="content" name="content" style="display:none;"></textarea>
+<textarea id="contents" name="contents" >@ViewBag.contents</textarea>
+
+
+<script type="text/javascript">
+	//CKEDITOR.config.width = '100%';
+	//CKEDITOR.config.height = 500;
+	//CKEDITOR.replace('contents', { enterMode: '2', shiftEnterMode: '3' });
+</script>
+
+
+<script type="text/javascript">
+	CKEDITOR.config.width = '100%';
+	CKEDITOR.config.height = 500;
+	CKEDITOR.replace('contents', {
+		enterMode: '2',
+		shiftEnterMode: '3',
+		toolbar: 'Full',
+		uiColor: '#eaebe7',
+		filebrowserBrowseUrl: '/WebHard/Popup',
+		filebrowserImageBrowseUrl: '/WebHard/Popup?type=Images',
+		filebrowserFlashBrowseUrl: '/WebHard/Popup?type=Flash',
+		filebrowserUploadUrl: '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files',
+		filebrowserImageUploadUrl: '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Images',
+		filebrowserFlashUploadUrl : '/Content/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash'
+	});
+
+</script>

@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<sqlMap namespace="CMS" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<statements>
+		<select id="CMS.select_cms_list" parameterClass="CCms" resultClass="CCms">
+			SELECT
+				*
+			FROM
+				tb_cms
+			<dynamic prepend="WHERE">
+				<isNotEqual property="idx" compareValue="0">
+					idx = #idx#
+				</isNotEqual>
+				<isNotEqual property="board_no" compareValue="0">
+					board_no = #board_no#
+				</isNotEqual>
+				<isNotNull property="subject" prepend="AND">
+					subject LIKE %#subject#%
+				</isNotNull>
+				<isNotNull property="content" prepend="AND">
+					content LIKE %#content#%
+				</isNotNull>
+				<isNotNull property="user_id" prepend="AND">
+					user_id = #user_id#
+				</isNotNull>
+				<isNotNull property="user_name" prepend="AND">
+					user_name LIKE %#user_name#%
+				</isNotNull>
+			</dynamic>
+		
+			<isNotNull property="sort_field">	
+			ORDER BY
+				$sort_field$
+			$sort_type$
+			</isNotNull>
+		</select>
+	</statements>
+	
+	
+</sqlMap>

@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "CommandView";
+	var command = ViewBag.command;
+	
+}
+
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		$('#btn-update').click(function () {
+			goView("/Command/Write", getParameter("idx"));
+		});
+
+		$('#btn-delete').click(function () {
+
+			showAlert("DELETE", "삭제하시겠습니까?", true, "deleteCommandOne();");
+		});
+
+	});
+
+	var deleteCommandOne = function () {
+		goSimpleProcess("/Command/Delete", { idx : getParameter("idx") }, "goList('Command');" );
+	}
+
+</script>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @ViewBag.PanelTitle
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+
+				<div class="panel panel-@ViewBag.command.html_class">
+					<div class="panel-body">
+						<button class="btn btn-@ViewBag.command.html_class ">@ViewBag.command.tree_key</button>
+					</div>
+					<div class="panel-heading">
+						@ViewBag.command.subject - @ViewBag.command.ord_emp_name
+					</div>
+					<div class="panel-body">
+						@Html.Raw( ViewBag.command.content )
+					</div>
+					<div class="panel-footer">
+						(@ViewBag.command.reg_date / @ViewBag.command.mod_date)
+					</div>
+				</div>
+
+				<div style="text-align: right;">
+					@if (ViewBag.IsAuth == true)
+					{
+						<button class="btn btn-primary" id="btn-update" type="button">UPDATE</button>
+						<button class="btn btn-danger" id="btn-delete" type="button">DELETE</button>
+					}
+					<button class="btn btn-default" id="btn-cancel" type="button" onclick="javascript:goList('Command');">Back</button>
+				</div>
+
+				
+
+			</div>
+		</div>
+	</div>
+</div>
+
+@{
+	Html.RenderAction("List", "Command");
+}

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="CODE" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<statements>
+
+		<select id="CODE.select_code_list" resultClass="CCode" parameterClass="System.Collections.Specialized.HybridDictionary">
+			SELECT
+				*
+			FROM
+				tb_code
+			<dynamic prepend="WHERE">
+			
+				<isNotNull prepend="AND" property="tree_type">
+					tree_type = #tree_type#
+				</isNotNull>
+				<isNotEqual prepend="AND" property="tree_code" compareValue="0">
+					tree_code = #tree_code#
+				</isNotEqual>
+				<isNotNull prepend="AND" property="emp_no">
+					emp_no = #emp_no#
+				</isNotNull>
+				<isNotNull prepend="AND" property="tree_level">
+					tree_level  >= #tree_level#
+				</isNotNull>
+			</dynamic>
+			ORDER BY
+				tree_order ASC
+		</select>
+		
+		<select id="CODE.select_code_type_list" resultClass="System.String" remapResults="true">
+			SELECT
+				DISTINCT(tree_type)
+			FROM
+				tb_code
+		</select>
+
+		<select id="CODE.select_code_one" resultClass="CCode" parameterClass="System.Int32">
+			SELECT
+				*
+			FROM
+				tb_code
+			WHERE
+				tree_code = #tree_code#
+		</select>
+
+		
+		<insert id="CODE.insert_code_one" parameterClass="CCode">
+			INSERT INTO
+				tb_code
+			(
+				tree_type,
+				tree_level,
+				tree_key,
+				tree_value,
+				tree_order,
+				html_class
+			)
+			VALUES
+			(
+				#tree_type#,
+				#tree_level#,
+				#tree_key#,
+				#tree_value#,
+				#tree_order#,
+				#html_class#
+			)
+		</insert>
+
+
+		<update id="CODE.update_code_one" parameterClass="System.Int32">
+			UPDATE
+				tb_code
+			SET
+				tree_type = #tree_type#,
+				tree_level = #tree_level#,
+				tree_key = #tree_key#,
+				tree_value = #tree_value#,
+				tree_order = #tree_order#,
+				html_class = #html_class#
+			WHERE
+				tree_code = #tree_code#
+		</update>
+
+		
+		<delete id="CODE.delete_code_one" parameterClass="System.Int32">
+			DELETE
+			FROM
+				tb_code
+			WHERE
+				tree_code = #tree_code#
+		</delete>
+		
+	</statements>
+</sqlMap>

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<sqlMap namespace="EMP" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+
+	<statements>
+
+		<select id="EMP.select_emp_list" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
+			SELECT
+				*
+			FROM
+				tb_emp
+			<dynamic prepend="WHERE">
+				<isNotEmpty property="search_text" >
+					user_id LIKE '%#search_text#%' OR passwd LIKE '%#search_text#%' OR user_name LIKE '%#search_text#%'
+				</isNotEmpty>
+			</dynamic>
+		</select>
+
+		<select id="EMP.select_emp" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
+			SELECT
+				*
+			FROM
+				tb_emp
+			WHERE
+			<isNotNull property="idx">
+				idx = #idx#
+			</isNotNull>
+			<isNotNull property="id">
+				id = #id#
+				<isNotNull prepend="AND" property="passwd">
+					passwd = #passwd#
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="emp_no">
+				emp_no = #emp_no#
+				<isNotNull prepend="AND" property="passwd">
+					passwd = #passwd#
+				</isNotNull>
+			</isNotNull>
+		</select>
+
+		<insert id="EMP.insert_emp" parameterClass="CEmp">
+			INSERT INTO
+			tb_emp
+			(
+				id,
+				name,
+				passwd,
+				email,
+				reg_date,
+				mod_date,
+				is_used,
+				is_admin
+			)
+			VALUES
+			(
+				#id#,
+				#name#,
+				#passwd#,
+				#email#,
+				#reg_date#,
+				#mod_date#,
+				#is_used#,
+				#is_admin#
+			)
+		</insert>
+
+		<update id="EMP.update_emp" parameterClass="CEmp">
+			UPDATE
+				tb_emp
+			SET
+				name = #name#,
+				passwd = #passwd#,
+				email = #email#,
+				reg_date = #reg_date#,
+				mod_date = #mod_date#,
+				is_used = #is_used#,
+				is_admin = #is_admin#
+			WHERE
+				idx = #idx#
+		</update>
+
+		<delete id="EMP.delete_emp" parameterClass="System.Int32">
+			DELETE
+			FROM
+				tb_emp
+			WHERE
+				idx = #idx#
+		</delete>
+		
+	</statements>
+</sqlMap>
