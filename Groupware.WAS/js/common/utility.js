@@ -61,7 +61,7 @@ var goView = function (url, idx) {
 
 }
 
-var goProcess = function (url_, frmId_, successFunc) {
+var doProcess = function (url_, frmId_, successFunc) {
 
 	$.ajax({
 		url: url_,
@@ -92,7 +92,7 @@ var goProcess = function (url_, frmId_, successFunc) {
 
 }
 
-var goSimpleProcess = function (url_, data_, successFunc) {
+var getProcess = function (url_, data_, successFunc) {
 
 	$.ajax({
 		url: url_,

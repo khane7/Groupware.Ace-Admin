@@ -53,13 +53,13 @@ namespace Groupware.Base
 			 * bootstrap
 			 * */
 
-			bundles.Add(new StyleBundle("~/custom/bootstrap-css").Include(
-						"~/css/bootstrap.css",
-						"~/css/bootstrap.min.css"));
+			//bundles.Add(new StyleBundle("~/custom/bootstrap-css").Include(
+			//			"~/css/bootstrap.css",
+			//			"~/css/bootstrap.min.css"));
 
-			bundles.Add(new ScriptBundle("~/custom/bootstrap-js").Include(
-						"~/js/bootstrap.js",
-						"~/js/bootstrap.min.js"));
+			//bundles.Add(new ScriptBundle("~/custom/bootstrap-js").Include(
+			//			"~/js/bootstrap.js",
+			//			"~/js/bootstrap.min.js"));
 
 			/**
 			 * utility

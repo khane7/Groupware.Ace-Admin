@@ -1,5 +1,5 @@
 ﻿@{
-	var bootstrap_themes = "sb-admin-v2";
+	var bootstrap_themes = "ace-v1.2--bs-v3.0.0";
 }
 
 <!DOCTYPE html>
@@ -12,15 +12,47 @@
 	@Scripts.Render("~/bundles/modernizr")
 	@Scripts.Render("~/bundles/jquery")
 
-	<!-- Core CSS - Include with every page -->
-	@Styles.Render("~/custom/bootstrap-css")
-	<link href="~/Bootstrap/@bootstrap_themes/css/bootstrap.css" />
-	<link href="~/Bootstrap/@bootstrap_themes/font-awesome/css/font-awesome.css" rel="stylesheet" />
 
-	<!-- Page-Level Plugin CSS - Blank -->
+	<!-- START : Bootstrap Templete -->
+		<!-- basic styles -->
 
-	<!-- SB Admin CSS - Include with every page -->
-	<link href="~/Bootstrap/@bootstrap_themes/css/sb-admin.css" rel="stylesheet" />
+		<link href="~/Bootstrap/@bootstrap_themes/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/font-awesome.min.css" />
+
+		<!--[if IE 7]>
+		  <link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/font-awesome-ie7.min.css" />
+		<![endif]-->
+
+		<!-- page specific plugin styles -->
+
+		<!-- fonts -->
+
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace-fonts.css" />
+
+		<!-- ace styles -->
+
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace-skins.min.css" />
+
+		<!--[if lte IE 8]>
+		  <link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace-ie.min.css" />
+		<![endif]-->
+
+		<!-- inline styles related to this page -->
+
+		<!-- ace settings handler -->
+
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace-extra.min.js"></script>
+
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+		<!--[if lt IE 9]>
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/html5shiv.js"></script>
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/respond.min.js"></script>
+		<![endif]-->
+	<!-- END : Bootstrap Templete -->
+
 
 	<!-- Groupware JS -->
 	@Scripts.Render("~/custom/common-js")
@@ -76,6 +108,40 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+
+
+	<!-- START : Bootstrap Templete -->
+		<!-- basic scripts -->
+
+		<!--[if !IE]> -->
+
+		<script type="text/javascript">
+			window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+		</script>
+
+		<!-- <![endif]-->
+
+		<!--[if IE]>
+		<script type="text/javascript">
+		 window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
+		</script>
+		<![endif]-->
+
+		<script type="text/javascript">
+			if ("ontouchend" in document) document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+		</script>
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/bootstrap.min.js"></script>
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/typeahead-bs2.min.js"></script>
+
+		<!-- page specific plugin scripts -->
+
+		<!-- ace scripts -->
+
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace-elements.min.js"></script>
+		<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace.min.js"></script>
+
+		<!-- inline scripts related to this page -->
+	<!-- END : Bootstrap Templete -->
 
 </body>
 </html>
