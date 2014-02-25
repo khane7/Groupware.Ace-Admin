@@ -17,7 +17,7 @@ namespace Groupware.Base.Controllers.common
         public ActionResult Index( )
         {
 
-            return View("~/views/common/Login.cshtml");
+            return View("~/views/common/Login/Login.cshtml");
         }
 
 		[HttpPost]

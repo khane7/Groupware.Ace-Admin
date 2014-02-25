@@ -2413,7 +2413,7 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_MainLayout.cshtml" />
-    <Content Include="Views\Common\Login.cshtml" />
+    <Content Include="Views\Common\Login\Login.cshtml" />
     <Content Include="Views\Common\Main.cshtml" />
     <Content Include="Views\Layout\Header.cshtml" />
     <Content Include="Views\Layout\LeftMenu.cshtml" />
@@ -2431,6 +2431,9 @@
     <Content Include="Views\Code\CodePreview.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\List.cshtml" />
+    <Content Include="Views\Common\Login\Register.cshtml" />
+    <Content Include="Views\Common\Login\FindAccount.cshtml" />
+    <Content Include="Views\Common\Dialog\DialogModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

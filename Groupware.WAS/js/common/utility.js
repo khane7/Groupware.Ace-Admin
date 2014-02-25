@@ -1,4 +1,4 @@
-﻿var showAlert = function (title, body, isConfirm, successFunc) {
+﻿var showAlert2 = function (title, body, isConfirm, successFunc) {
 
 	$("#myModalLabel").html(title);
 	$("#myModalBody").html(body);
@@ -15,7 +15,7 @@
 
 }
 
-var hideAlert = function () {
+var hideAlert2 = function () {
 
 	$("#myModal").modal("hide");
 
@@ -25,14 +25,14 @@ var hideAlert = function () {
 //실제 페이지 이동
 var goPage = function (pageUrl) {
 
-	showAlert("Wait", "Loading...", false);
+	showLoading();
 	location.href = pageUrl;
 	hideAlert();
 }
 
 var goPageNum = function (pageNum) {
 
-	showAlert("Wait", "Loading...", false);
+	showLoading();
 	var params = "";
 	params = removeURLParameter(location.href, "pageNum");
 	params = removeParameter(params, "idx");
@@ -83,7 +83,7 @@ var doProcess = function (url_, frmId_, successFunc) {
 			
 		},
 		beforeSend: function () {
-			showAlert("Process", "Loading...", false);
+			showLoading();
 		}
 		, error: function (response, textStatus, errorThrown) {
 			showAlert(textStatus, errorThrown + "<br>" + response.responseText, false);
@@ -109,7 +109,7 @@ var getProcess = function (url_, data_, successFunc) {
 			(successFunc != "") ? eval(successFunc) : "";
 		},
 		beforeSend: function () {
-			showAlert("Process", "Loading...", false);
+			showLoading();
 		}
 		, error: function (response, textStatus, errorThrown) {
 			showAlert(textStatus, errorThrown + "<br>" + response.responseText, false);

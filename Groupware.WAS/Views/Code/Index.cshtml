@@ -31,7 +31,7 @@
 			$('#tree_code').attr('disabled', false);
 			$('#tree_level').attr('disabled', false);
 
-			goProcess("/Code/setCodeOne", "frm", "goPage('./?tree_type=" + getParameter("tree_type") + "');");
+			doProcess("/Code/setCodeOne", "frm", "goPage('./?tree_type=" + getParameter("tree_type") + "');");
 
 			$('#tree_code').attr('disabled', true);
 			$('#tree_level').attr('disabled', true);
@@ -127,7 +127,7 @@
 	}
 
 	var setTreeCode = function ( tree_code ) {
-		goSimpleProcess("/Code/getCodeOne", { "tree_code": tree_code }, "getTreeCode(data);");
+		getProcess("/Code/getCodeOne", { "tree_code": tree_code }, "getTreeCode(data);");
 	}
 	var getTreeCode = function (data) {
 		$('#tree_code').val(data.tree_code);
@@ -139,7 +139,7 @@
 	}
 	var deleteCodeOne = function () {
 		$('#tree_code').attr('disabled', false);
-		goProcess("/Code/deleteCodeOne", "frm", "goPage('./?tree_type=" + getParameter("tree_type") + "');");
+		doProcess("/Code/deleteCodeOne", "frm", "goPage('./?tree_type=" + getParameter("tree_type") + "');");
 	}
 
 </script>
