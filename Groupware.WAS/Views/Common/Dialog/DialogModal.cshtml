@@ -36,10 +36,12 @@
 
 
 	var hideAlert = function () {
+	    //alert($("#dialog-message").is(':data(dialog)'));
+		$("#dialog-message").dialog("close");
+	}
 
-		$("#dialog-message").modal("hide");
-		$("#dialog-confirm").modal("hide");
-
+	var hideConfirm = function () {
+	    $("#dialog-confirm").dialog("close");
 	}
 
 	var showLoading = function () {
@@ -81,6 +83,7 @@
 		}
 
 		var dialog = $("#dialog-message").removeClass('hide').dialog({
+            width: 480,
 			modal: true,
 			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> " + title  + "</h4></div>",
 			title_html: true,
@@ -96,7 +99,15 @@
 						}
 					}
 				}
-			]
+			],
+			show: {
+			    effect: "fade",
+			    duration: 300
+			},
+			hide: {
+			    effect: "drop",
+			    duration: 300
+			}
 		});
 
 	}
@@ -107,6 +118,7 @@ var showConfirm = function (title, content, OK_Func, NO_Func) {
 	e.preventDefault();
 
 	var dialog = $("#dialog-message").removeClass('hide').dialog({
+	    width: 480,
 		modal: true,
 		title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
 		title_html: true,
@@ -133,7 +145,15 @@ var showConfirm = function (title, content, OK_Func, NO_Func) {
 					}
 				}
 			}
-		]
+		],
+		show: {
+		    effect: "blind",
+		    duration: 1000
+		},
+		hide: {
+		    effect: "blind",
+		    duration: 1000
+		}
 	});
 
 	dialog.data("uiDialog")._title = function (title) {

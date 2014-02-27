@@ -40,33 +40,53 @@
 
 	@{
 		var status = 0;
-		var prev_level = 1;
-		var currentUrl = HttpContext.Current.Request.Url.AbsolutePath;
-				
+		var prev_level = 0;
+		var curr_level = 0;
+
 		foreach (var item in ViewBag.listTree)
 		{
-			var curr_level = item.tree_level;
+			curr_level = item.tree_level;
+
+			if (prev_level != 0 && prev_level < curr_level)
+			{
+				@Html.Raw("<ul class='submenu'>");
+			}
+			else if (prev_level != 0 && prev_level > curr_level)
+			{
+				@Html.Raw("	</ul>");
+				@Html.Raw("</li>");
+			}
 
 			@Html.Raw("<li>");
-			
-				@if ( @item.tree_value == "#") {
-					<a href="@item.tree_value">
-						<i class="fa @item.html_class fa-fw"></i>
-						<span class="menu-text"> @item.tree_key </span>
-					</a>
-				} else {
-					<i class="fa @item.html_class fa-fw"></i>
+			if (@item.tree_value == "#")
+			{
+				<a href="#" class="dropdown-toggle">
+					<i class="@item.html_class"></i>
 					<span class="menu-text"> @item.tree_key </span>
-				}
+				</a>
+			}
+			else
+			{
+				<a href="@item.tree_value">
+					<i class="@item.html_class"></i>
+					<span class="menu-text"> @item.tree_key </span>
+				</a>
+			}
 	 
-			@Html.Raw("</li>");
 			prev_level = curr_level;
 			status++;
 		}
+		@Html.Raw("	</ul>");
+		@Html.Raw("</li>");
 	}
 
 
-	<li>
+
+
+
+
+	<!-- 트리메뉴 예제 -->
+@*	<li>
 		<a href="index.html">
 			<i class="icon-dashboard"></i>
 			<span class="menu-text"> Dashboard </span>
@@ -362,7 +382,9 @@
 			</li>
 		</ul>
 	</li>
-</ul><!-- /.nav-list -->
+</ul>*@<!-- /.nav-list -->
+
+
 
 <div class="sidebar-collapse" id="sidebar-collapse">
 	<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>

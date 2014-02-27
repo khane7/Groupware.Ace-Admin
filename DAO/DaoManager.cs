@@ -40,7 +40,7 @@ public class DaoManager
 			}
 			catch (Exception ex)
 			{
-				throw;
+				throw new Exception(ex.Message);
 			}
 		}
 	}
