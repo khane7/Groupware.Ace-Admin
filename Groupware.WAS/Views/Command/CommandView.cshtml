@@ -14,13 +14,13 @@
 
 		$('#btn-delete').click(function () {
 
-			showAlert("DELETE", "삭제하시겠습니까?", true, "deleteCommandOne();");
+			showDelete("DELETE", "삭제하시겠습니까?", "deleteCommandOne();");
 		});
 
 	});
 
 	var deleteCommandOne = function () {
-		goSimpleProcess("/Command/Delete", { idx : getParameter("idx") }, "goList('Command');" );
+		getProcess("/Command/Delete", { idx : getParameter("idx") }, "goList('Command');" );
 	}
 
 </script>

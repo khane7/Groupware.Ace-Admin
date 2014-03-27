@@ -42,7 +42,7 @@
 		var status = 0;
 		var prev_level = 0;
 		var curr_level = 0;
-
+        
 		foreach (var item in ViewBag.listTree)
 		{
 			curr_level = item.tree_level;
@@ -57,7 +57,7 @@
 				@Html.Raw("</li>");
 			}
 
-			@Html.Raw("<li>");
+			@Html.Raw("<li id='" + @item.tree_value + "'>");
 			if (@item.tree_value == "#")
 			{
 				<a href="#" class="dropdown-toggle">
@@ -67,7 +67,7 @@
 			}
 			else
 			{
-				<a href="@item.tree_value">
+				<a href="javascript:goPage('@item.tree_value');">
 					<i class="@item.html_class"></i>
 					<span class="menu-text"> @item.tree_key </span>
 				</a>

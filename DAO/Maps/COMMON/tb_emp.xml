@@ -5,38 +5,51 @@
 	<statements>
 
 		<select id="EMP.select_emp_list" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
-			SELECT
-				*
+			SELECT 
+				A.*,
+				B.*,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.company_cd) AS company_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.part_cd) AS part_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.department_cd) AS department_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.position_cd) AS position_name
 			FROM
-				tb_emp
+				tb_emp AS A
+				LEFT JOIN     tb_emp_detail AS B ON A.emp_no = B.emp_no
 			<dynamic prepend="WHERE">
-				<isNotEmpty property="search_text" >
-					user_id LIKE '%#search_text#%' OR passwd LIKE '%#search_text#%' OR user_name LIKE '%#search_text#%'
+				<isNotEmpty prepend="AND" property="search_text" >
+					A.user_id LIKE '%#search_text#%' OR A.passwd LIKE '%#search_text#%' OR A.user_name LIKE '%#search_text#%'
 				</isNotEmpty>
 			</dynamic>
 		</select>
 
 		<select id="EMP.select_emp" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
-			SELECT
-				*
+			SELECT 
+				A.*,
+				B.*,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.company_cd) AS company_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.part_cd) AS part_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.department_cd) AS department_name,
+				(SELECT tree_key FROM tb_code WHERE tree_code = B.position_cd) AS position_name
 			FROM
-				tb_emp
-			WHERE
-			<isNotNull property="idx">
-				idx = #idx#
-			</isNotNull>
-			<isNotNull property="id">
-				id = #id#
-				<isNotNull prepend="AND" property="passwd">
-					passwd = #passwd#
+				tb_emp AS A
+				LEFT JOIN     tb_emp_detail AS B ON A.emp_no = B.emp_no
+			<dynamic prepend="WHERE">
+				<isNotNull prepend="AND" property="idx">
+					A.idx = #idx#
 				</isNotNull>
-			</isNotNull>
-			<isNotNull property="emp_no">
-				emp_no = #emp_no#
-				<isNotNull prepend="AND" property="passwd">
-					passwd = #passwd#
+				<isNotNull prepend="AND" property="id">
+					A.id = #id#
+					<isNotNull prepend="AND" property="passwd">
+						A.passwd = #passwd#
+					</isNotNull>
 				</isNotNull>
-			</isNotNull>
+				<isNotNull prepend="AND" property="emp_no">
+					A.emp_no = #emp_no#
+					<isNotNull prepend="AND" property="passwd">
+						A.passwd = #passwd#
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
 		</select>
 
 		<insert id="EMP.insert_emp" parameterClass="CEmp">

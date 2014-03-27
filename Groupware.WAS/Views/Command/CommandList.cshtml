@@ -11,7 +11,7 @@
 	});
 
 	var goMyList = function (list_type) {
-		showAlert("Wait", "Loading...", false);
+		showLoading();
 		location.href = "/command/?list_type=" + list_type;
 	}
 

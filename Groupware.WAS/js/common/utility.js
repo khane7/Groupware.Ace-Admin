@@ -1,33 +1,10 @@
-﻿var showAlert2 = function (title, body, isConfirm, successFunc) {
-
-	$("#myModalLabel").html(title);
-	$("#myModalBody").html(body);
-	if (isConfirm == false) {
-		$('#btn-modal-save').hide();
-	} else {
-		$('#btn-modal-save').show();
-		$('#btn-modal-save').click(function () {
-			eval(successFunc);
-		});
-	}
-
-	$("#myModal").modal("show");
-
-}
-
-var hideAlert2 = function () {
-
-	$("#myModal").modal("hide");
-
-}
-
-
+﻿
 //실제 페이지 이동
 var goPage = function (pageUrl) {
 
 	showLoading();
 	location.href = pageUrl;
-	hideAlert();
+	//hideAlert();
 }
 
 var goPageNum = function (pageNum) {
@@ -46,19 +23,21 @@ var goPageNum = function (pageNum) {
 }
 
 var goBack = function () {
+	showLoading();
 	history.back();
 }
 
 var goList = function (url) {
 
 	//location.href = "/" + url + "?" + removeParameter(location.href, "idx");
+	showLoading();
 	goPage("/" + url + "?" + removeParameter(location.href, "idx"));
 }
 
 var goView = function (url, idx) {
 
+	showLoading();
 	location.href = url + "?idx=" + idx + "&" + removeParameter(location.href, "idx");
-
 }
 
 var doProcess = function (url_, frmId_, successFunc) {
@@ -73,7 +52,6 @@ var doProcess = function (url_, frmId_, successFunc) {
 		clearForm: true,
 		resetForm: true,
 		success: function (data) {
-			//hideAlert();
 
 			if (data.RESULT == "OK") {
 				(successFunc != "") ? eval(successFunc) : "";
@@ -84,6 +62,8 @@ var doProcess = function (url_, frmId_, successFunc) {
 		},
 		beforeSend: function () {
 			showLoading();
+		}, complete: function () {
+			//hideAlert();
 		}
 		, error: function (response, textStatus, errorThrown) {
 			showAlert(textStatus, errorThrown + "<br>" + response.responseText, false);
@@ -110,6 +90,8 @@ var getProcess = function (url_, data_, successFunc) {
 		},
 		beforeSend: function () {
 			showLoading();
+		}, complete: function () {
+			//hideAlert();
 		}
 		, error: function (response, textStatus, errorThrown) {
 			showAlert(textStatus, errorThrown + "<br>" + response.responseText, false);

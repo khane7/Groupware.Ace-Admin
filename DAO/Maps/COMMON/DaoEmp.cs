@@ -10,7 +10,7 @@ namespace DAO
 	{
 		private static ILog logManager = LogManager.GetLogger(typeof(DaoManager));
 
-		public IList<CEmp> getEmpList( string strSearch_ )
+		public IList<CEmp> getEmpList(string strSearch_)
 		{
 			IList<CEmp> ilUser = new List<CEmp>();
 
@@ -30,12 +30,12 @@ namespace DAO
 			return ilUser;
 		}
 
-		public CEmp getEmp( IDictionary<string, object> dic )
+		public CEmp getEmp(IDictionary<string, object> dic)
 		{
 			return DaoManager.Instance.QueryForObject<CEmp>("EMP.select_emp", dic);
 		}
 
-		public CEmp getEmp( int idx )
+		public CEmp getEmp(int idx)
 		{
 			IDictionary<string, object> iDic = new Dictionary<string, object>();
 			iDic.Add("idx", idx);

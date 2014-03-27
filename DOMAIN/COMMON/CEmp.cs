@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class CEmp
+public class CEmp : CEmpDetail
 {
 	public int idx { get; set; }
 	public string emp_no { get; set; }

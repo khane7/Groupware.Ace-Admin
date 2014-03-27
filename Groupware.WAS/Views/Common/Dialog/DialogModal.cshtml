@@ -21,6 +21,16 @@
 	</p>
 </div><!-- #dialog-confirm -->
 
+<div id="dialog-emp" class="hide">
+	<div class="alert alert-info bigger-110" id="dialog-emp-content1"></div>
+
+	<div class="space-6"></div>
+
+	<p class="bigger-110 bolder center grey" id="dialog-emp-content2">
+		<i class="icon-hand-right blue bigger-120"></i>
+	</p>
+</div><!-- #dialog-confirm -->
+
 
 <script type="text/javascript">
 
@@ -52,6 +62,10 @@
 		showAlert("Loading.....", progressBar, false);
 	}
 
+	var hideLoading = function () {
+		hideAlert();
+	}
+
 	var showAlert = function (title, body, isConfirm, OK_Func, body2) {
 		
 		//e.preventDefault();
@@ -60,16 +74,28 @@
 		$('#dialog-message-content2').html(body2);
 
 		var buttons = new Array();
-		if ( isConfirm == true ) {
+		if (isConfirm == true) {
 			buttons[0] = {
 				text: "Cancel",
 				"class": "btn btn-xs",
 				click: function () {
-					//$(this).dialog("close");
+					$(this).dialog("close");
 					$('#hideAlert').modal("hide");
 				}
 			}
 			buttons[1] = {
+				text: "OK",
+				"class": "btn btn-danger btn-xs",
+				click: function () {
+					if (OK_Func == null || OK_Func == undefined) {
+						$(this).dialog("close");
+					} else {
+						eval(OK_Func);
+					}
+				}
+			}
+		} else {
+			buttons[0] = {
 				text: "OK",
 				"class": "btn btn-primary btn-xs",
 				click: function () {
@@ -87,25 +113,13 @@
 			modal: true,
 			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> " + title  + "</h4></div>",
 			title_html: true,
-			buttons: [
-				{
-					text: "OK",
-					"class": "btn btn-primary btn-xs",
-					click: function () {
-						if (OK_Func == null || OK_Func == undefined) {
-							$(this).dialog("close");
-						} else {
-							eval(OK_Func);
-						}
-					}
-				}
-			],
+			buttons: buttons,
 			show: {
 			    effect: "fade",
 			    duration: 300
 			},
 			hide: {
-			    effect: "drop",
+			    effect: "fade",
 			    duration: 300
 			}
 		});
@@ -113,87 +127,119 @@
 	}
 
 
+	var showEmpSelector = function () {
+		//alert("ck");
+		//e.preventDefault();
 
-var showConfirm = function (title, content, OK_Func, NO_Func) {
-	e.preventDefault();
+		var title = "Select Member";
 
-	var dialog = $("#dialog-message").removeClass('hide').dialog({
-	    width: 480,
-		modal: true,
-		title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
-		title_html: true,
-		buttons: [
-			{
-				text: "Cancel",
-				"class": "btn btn-xs",
-				click: function () {
-					if (NO_Func == null) {
-						$(this).dialog("close");
-					} else {
-						eval(NO_Func);
-					}
-				}
-			},
-			{
+		var dialog = $("#dialog-emp").removeClass('hide').dialog({
+			width: 820,
+			height: 580,
+			modal: true,
+			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> " + title + "</h4></div>",
+			title_html: true,
+			buttons: [{
 				text: "OK",
 				"class": "btn btn-primary btn-xs",
 				click: function () {
-					if (OK_Func == null) {
-						$(this).dialog("close");
-					} else {
-						eval(OK_Func);
-					}
-				}
-			}
-		],
-		show: {
-		    effect: "blind",
-		    duration: 1000
-		},
-		hide: {
-		    effect: "blind",
-		    duration: 1000
-		}
-	});
-
-	dialog.data("uiDialog")._title = function (title) {
-		title.html(this.options.title);
-	};
-
-	/**
-	dialog.data( "uiDialog" )._title = function(title) {
-		title.html( this.options.title );
-	};
-	**/
-}
-
-
-var showConfirmAlert = function (title, content, OK_Func, NO_Func) {
-	e.preventDefault();
-
-	$("#dialog-confirm").removeClass('hide').dialog({
-		resizable: false,
-		modal: true,
-		title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> Empty the recycle bin?</h4></div>",
-		title_html: true,
-		buttons: [
-			{
-				html: "<i class='icon-trash bigger-110'></i>&nbsp; Delete all items",
-				"class": "btn btn-danger btn-xs",
-				click: function () {
 					$(this).dialog("close");
 				}
+			}],
+			show: {
+				effect: "fade",
+				duration: 300
+			},
+			hide: {
+				effect: "fade",
+				duration: 300
 			}
-			,
-			{
-				html: "<i class='icon-remove bigger-110'></i>&nbsp; Cancel",
-				"class": "btn btn-xs",
-				click: function () {
-					$(this).dialog("close");
-				}
-			}
-		]
-	});
-}
+		});
+
+	}
+
+
+//var showConfirm = function (title, content, OK_Func, NO_Func) {
+//	e.preventDefault();
+
+//	var dialog = $("#dialog-message").removeClass('hide').dialog({
+//	    width: 480,
+//		modal: true,
+//		title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> jQuery UI Dialog</h4></div>",
+//		title_html: true,
+//		buttons: [
+//			{
+//				text: "Cancel",
+//				"class": "btn btn-xs",
+//				click: function () {
+//					if (NO_Func == null) {
+//						$(this).dialog("close");
+//					} else {
+//						eval(NO_Func);
+//					}
+//				}
+//			},
+//			{
+//				text: "OK",
+//				"class": "btn btn-primary btn-xs",
+//				click: function () {
+//					if (OK_Func == null) {
+//						$(this).dialog("close");
+//					} else {
+//						eval(OK_Func);
+//					}
+//				}
+//			}
+//		],
+//		show: {
+//		    effect: "fade",
+//		    duration: 1000
+//		},
+//		hide: {
+//		    effect: "fade",
+//		    duration: 1000
+//		}
+//	});
+
+//	dialog.data("uiDialog")._title = function (title) {
+//		title.html(this.options.title);
+//	};
+
+//	/**
+//	dialog.data( "uiDialog" )._title = function(title) {
+//		title.html( this.options.title );
+//	};
+//	**/
+//}
+
+
+//var showConfirmAlert = function (title, content, OK_Func, NO_Func) {
+//	e.preventDefault();
+
+//	$("#dialog-confirm").removeClass('hide').dialog({
+//		resizable: false,
+//		modal: true,
+//		title: "<div class='widget-header'><h4 class='smaller'><i class='icon-warning-sign red'></i> Empty the recycle bin?</h4></div>",
+//		title_html: true,
+//		buttons: [
+//			{
+//				html: "<i class='icon-trash bigger-110'></i>&nbsp; Delete all items",
+//				"class": "btn btn-danger btn-xs",
+//				click: function () {
+//					$(this).dialog("close");
+//				}
+//			}
+//			,
+//			{
+//				html: "<i class='icon-remove bigger-110'></i>&nbsp; Cancel",
+//				"class": "btn btn-xs",
+//				click: function () {
+//					$(this).dialog("close");
+//				}
+//			}
+//		]
+//	});
+//}
+
 
 </script>

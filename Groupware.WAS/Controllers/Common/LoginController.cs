@@ -27,7 +27,7 @@ namespace Groupware.Base.Controllers.common
 			string strId = Request.Form["id"];
 
 			DaoEmp daoEmp = new DaoEmp();
-			
+
 			CEmp emp = daoEmp.getEmp(Request.Form["id"], Request.Form["passwd"]);
 			if (emp == null)
 			{
