@@ -1,0 +1,115 @@
+﻿@{
+	ViewBag.PanelTitle = "Code Preview";
+}
+<script type="text/javascript">
+
+	$(document).ready(function () {
+
+		$('#sel-tree_type').val((getParameter("tree_type") == "") ? "company" : getParameter("tree_type"));
+		$('#tree_type').val($('#sel-tree_type').val());
+		$('#sel-tree_type').change(function () {
+			goPage("./?tree_type=" + $(this).val());
+		});
+
+	});
+
+</script>
+
+<div class="row">
+    <div class="col-lg-4">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<!--@ViewBag.PanelTitle-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+
+				<div id="emp_jstree">
+					<ul>
+					@{
+						var status = 0;
+						var prev_level = 0;
+						foreach (var item in ViewBag.listCode)
+						{
+
+							if ( prev_level != 0 && @item.tree_level > prev_level )
+							{
+								@Html.Raw("<ul>");
+							}
+							else if (prev_level != 0 && @item.tree_level < prev_level)
+							{
+								@Html.Raw("</ul></li>");
+							}
+							else
+							{
+								@Html.Raw("</li>");
+							}
+					
+							@Html.Raw("<li id='" + @item.tree_code + "-" + @item.tree_order + "' class='tree_list'>");
+								@item.tree_key
+	   
+							prev_level = @item.tree_level;
+						}
+					}
+					</ul>
+				</div>
+
+				<script>
+				$(function () {
+					// 6 create an instance when the DOM is ready
+					$('#emp_jstree').jstree();
+					$('#emp_jstree').jstree("open_all");
+					// 7 bind to events triggered on the tree
+					$('#emp_jstree').on("changed.jstree", function (e, data) {
+						console.log(data.selected);
+						alert(parseInt(data.selected.toString().split("-")[0]));
+						//setTreeCode(parseInt(data.selected.toString().split("-")[0]));
+					});
+					$("#emp_jstree").bind("select_node.jstree", function (e, data) {
+						// data.inst is the tree object, and data.rslt.obj is the node
+						//return data.inst.toggle_node(data.rslt.obj);
+						//alert($(this).jstree("is_open"));
+						if (data.instance.is_open(data.node) == false) {
+							data.instance.open_node(data.node)
+						}
+				
+						//data.instance.toggle_node(data.node);
+					});
+
+					// 8 interact with the tree - either way is OK
+					//$('button').on('click', function () {
+					//	//javascript: setTreeCode('item.tree_code');
+					//	$('#jstree').jstree(true).select_node('child_node_1');
+					//	$('#jstree').jstree('select_node', 'child_node_1');
+					//	$.jstree.reference('#jstree').select_node('child_node_1');
+					//});
+				});
+				</script>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div class="col-lg-8">
+
+				<div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th class="center">no</th>
+                                <th>부서</th>
+                                <th class="center">성명</th>
+                                <th class="center">직위</th>
+                                <th class="center">직무</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+
+                </div>
+
+	</div>
+</div>

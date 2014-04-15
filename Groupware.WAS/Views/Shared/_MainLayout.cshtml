@@ -3,7 +3,7 @@
 	
 	if ( Session["emp_no"] == null || Session["emp_no"] == "" )
 	{
-		Html.RenderAction("Index", "Login");
+		//Html.RenderAction("Index", "Login");
 	}
 }
 <!DOCTYPE html>
@@ -108,10 +108,10 @@
 							<a href="#">Home</a>
 						</li>
 
-						<li>
+@*						<li>
 							<a href="#">Other Pages</a>
-						</li>
-						<li class="active">Blank Page</li>
+						</li>*@
+						<li class="active">@ViewBag.TItle</li>
 					</ul><!-- .breadcrumb -->
 
 					<div class="nav-search" id="nav-search">
@@ -125,6 +125,18 @@
 				</div>
 
 				<div class="page-content">
+					<div class="page-header">
+						<h1>
+							@ViewBag.Title
+							@if (ViewBag.Desc != null)
+							{
+							<small>
+								<i class="icon-double-angle-right"></i>
+								@ViewBag.Desc
+							</small>		   
+							}
+						</h1>
+					</div>
 					<div class="row">
 						<div class="col-xs-12">
 							<!-- PAGE CONTENT BEGINS -->
@@ -231,6 +243,7 @@
 
 </body>
 
-@RenderPage("~/Views/Common/Dialog/DialogModal.cshtml")
+@RenderPage("~/Views/Common/Dialog/AlertDialog.cshtml")
+@RenderPage("~/Views/Common/Dialog/EmpDialog.cshtml")
 
 </html>

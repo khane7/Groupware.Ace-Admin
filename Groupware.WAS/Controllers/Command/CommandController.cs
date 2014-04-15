@@ -143,12 +143,12 @@ namespace Groupware.Base.Controllers.Command
 				if (Request["idx"] != null && Request["idx"].ToString() != "")
 				{
 					command.idx = int.Parse(Request["idx"]);
+					command.reg_date = DateTime.Now;
 					command.mod_date = DateTime.Now.Date;
 					
 				}
 				else
 				{
-					command.reg_date = DateTime.Now;
 					command.mod_date = DateTime.Now;
 				}
 				daoCommand.setCommand(command);

@@ -3,6 +3,7 @@
 }
 
 
+<!-- Message Dialog -->
 <div id="dialog-message" class="hide">
 	<p id="dialog-message-content1"></p>
 
@@ -11,6 +12,8 @@
 	<p id="dialog-message-content2"></p>
 </div><!-- #dialog-message -->
 
+
+<!-- Confirm Dialog -->
 <div id="dialog-confirm" class="hide">
 	<div class="alert alert-info bigger-110" id="dialog-confirm-content1"></div>
 
@@ -21,15 +24,6 @@
 	</p>
 </div><!-- #dialog-confirm -->
 
-<div id="dialog-emp" class="hide">
-	<div class="alert alert-info bigger-110" id="dialog-emp-content1"></div>
-
-	<div class="space-6"></div>
-
-	<p class="bigger-110 bolder center grey" id="dialog-emp-content2">
-		<i class="icon-hand-right blue bigger-120"></i>
-	</p>
-</div><!-- #dialog-confirm -->
 
 
 <script type="text/javascript">
@@ -127,36 +121,7 @@
 	}
 
 
-	var showEmpSelector = function () {
-		//alert("ck");
-		//e.preventDefault();
 
-		var title = "Select Member";
-
-		var dialog = $("#dialog-emp").removeClass('hide').dialog({
-			width: 820,
-			height: 580,
-			modal: true,
-			title: "<div class='widget-header widget-header-small'><h4 class='smaller'><i class='icon-ok'></i> " + title + "</h4></div>",
-			title_html: true,
-			buttons: [{
-				text: "OK",
-				"class": "btn btn-primary btn-xs",
-				click: function () {
-					$(this).dialog("close");
-				}
-			}],
-			show: {
-				effect: "fade",
-				duration: 300
-			},
-			hide: {
-				effect: "fade",
-				duration: 300
-			}
-		});
-
-	}
 
 
 //var showConfirm = function (title, content, OK_Func, NO_Func) {

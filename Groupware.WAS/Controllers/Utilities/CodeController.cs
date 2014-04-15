@@ -129,5 +129,30 @@ namespace Groupware.Base.Controllers.Utilities
 			return jobj;
 		}
 
+
+
+		public ActionResult CodeTree(string tree_type)
+		{
+			IList<CCode> listCode = new List<CCode>();
+			try
+			{
+				if (tree_type == null || tree_type == "")
+				{
+					tree_type = "company";
+				}
+
+				DaoCode daoCode = new DaoCode();
+				listCode = daoCode.getCodeList(tree_type, 0, null, 0);
+				ViewBag.listCode = listCode;
+				ViewBag.listCodeType = daoCode.getCodeTypeList();
+			}
+			catch (Exception e)
+			{
+				throw new Exception(e.Message);
+			}
+
+			return PartialView("~/Views/Code/CodeTree.cshtml", listCode);
+		}
+
     }
 }

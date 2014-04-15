@@ -13,7 +13,7 @@ namespace Groupware.Base.Controllers.common
 
         public ActionResult Index()
         {
-					if (Session["idx"] == null || Session["emp_no"] == null)
+					if (Session["idx"] == null && Session["emp_no"] == null)
 					{
 						return RedirectToAction("index", "login");
 					}

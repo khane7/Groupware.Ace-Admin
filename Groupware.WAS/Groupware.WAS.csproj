@@ -2449,7 +2449,9 @@
     <Content Include="Views\Account\List.cshtml" />
     <Content Include="Views\Common\Login\Register.cshtml" />
     <Content Include="Views\Common\Login\FindAccount.cshtml" />
-    <Content Include="Views\Common\Dialog\DialogModal.cshtml" />
+    <Content Include="Views\Common\Dialog\AlertDialog.cshtml" />
+    <Content Include="Views\Code\CodeTree.cshtml" />
+    <Content Include="Views\Common\Dialog\EmpDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

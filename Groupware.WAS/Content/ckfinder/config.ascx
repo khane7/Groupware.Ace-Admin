@@ -27,8 +27,8 @@
 	{
 		// Paste your license name and key here. If left blank, CKFinder will
 		// be fully functional, in Demo Mode.
-		LicenseName = "";
-		LicenseKey = "";
+		LicenseName = "dsadsad";
+		LicenseKey = "dsadsa";
 
 		// The base URL used to reach files in CKFinder through the browser.
 		BaseUrl = "/Attache/ckfinder/userfiles/" + Session["emp_no"] + "/";
@@ -71,8 +71,8 @@
 		// Set the maximum size of uploaded images. If an uploaded image is
 		// larger, it gets scaled down proportionally. Set to 0 to disable this
 		// feature.
-		Images.MaxWidth = 1600;
-		Images.MaxHeight = 1200;
+		Images.MaxWidth = 0;
+		Images.MaxHeight = 0;
 		Images.Quality = 80;
 
 		// Indicates that the file size (MaxSize) for images must be checked only
@@ -82,7 +82,7 @@
 		// Increases the security on an IIS web server.
 		// If enabled, CKFinder will disallow creating folders and uploading files whose names contain characters
 		// that are not safe under an IIS 6.0 web server.
-		DisallowUnsafeCharacters = true;
+		DisallowUnsafeCharacters = false;
 
 		// If CheckDoubleExtension is enabled, each part of the file name after a dot is
 		// checked, not only the last part. In this way, uploading foo.php.rar would be
@@ -92,7 +92,7 @@
 
 		// Due to security issues with Apache modules, it is recommended to leave the
 		// following setting enabled. It can be safely disabled on IIS.
-		ForceSingleExtension = true;
+		ForceSingleExtension = false;
 
 		// For security, HTML is allowed in the first Kb of data for files having the
 		// following extensions only.
@@ -167,7 +167,11 @@
 		type.Url = BaseUrl + "files/";
 		type.Dir = BaseDir == "" ? "" : BaseDir + "files/";
 		type.MaxSize = 0;
-		type.AllowedExtensions = new string[] { "7z", "aiff", "asf", "avi", "bmp", "csv", "doc", "docx", "fla", "flv", "gif", "gz", "gzip", "jpeg", "jpg", "mid", "mov", "mp3", "mp4", "mpc", "mpeg", "mpg", "ods", "odt", "pdf", "png", "ppt", "pptx", "pxd", "qt", "ram", "rar", "rm", "rmi", "rmvb", "rtf", "sdc", "sitd", "swf", "sxc", "sxw", "tar", "tgz", "tif", "tiff", "txt", "vsd", "wav", "wma", "wmv", "xls", "xlsx", "zip" };
+		type.AllowedExtensions = new string[] { 
+			"7z", "aiff", "asf", "avi", "bmp", "csv", "doc", "docx", "fla", "flv", "gif", "gz", "gzip", "jpeg", "jpg", "mid", "mov", "mp3", "mp4", "mpc", 
+			"mpeg", "mpg", "ods", "odt", "pdf", "png", "ppt", "pptx", "pxd", "qt", "ram", "rar", "rm", "rmi", "rmvb", "rtf", "sdc", "sitd", "swf", "sxc",
+			"sxw", "tar", "tgz", "tif", "tiff", "txt", "vsd", "wav", "wma", "wmv", "xls", "xlsx", "zip"
+		};
 		type.DeniedExtensions = new string[] { };
 
 		type = ResourceType.Add( "Images" );

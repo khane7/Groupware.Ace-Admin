@@ -22,7 +22,7 @@
 					A.ord_emp_no = #ord_emp_no#
 				</isNotNull>
 				<isNotNull property="receive_emp_no" prepend="AND">
-					B.receive_emp_no = #receive_emp_no#
+					B.receive_emp_no = #receive_emp_no# <!--AND A.is_delete = 'N'-->
 				</isNotNull>
 
 			</dynamic>
@@ -120,8 +120,10 @@
 
 		
 		<delete id="COMMAND.delete_command" parameterClass="System.Int32">
-			DELETE FROM 
+			UPDATE
 				tb_command
+			SET
+				is_delete = 'Y'
 			WHERE
 				idx = #idx#
 		</delete>
