@@ -12,5 +12,6 @@ public class CCode
 	public string tree_value { get; set; }
 	public string tree_order { get; set; }
 	public string html_class { get; set; }
+	public string html_icon { get; set; }
 	public int tree_level { get; set; }
 }

@@ -6,20 +6,20 @@ using log4net;
 
 namespace DAO
 {
-	public class DaoEmp
+	public class DaoAccount
 	{
 		private static ILog logManager = LogManager.GetLogger(typeof(DaoManager));
 
-		public IList<CEmp> getEmpList(string strSearch_)
+		public IList<CAccount> getAcountList(string strSearch_)
 		{
-			IList<CEmp> ilUser = new List<CEmp>();
+			IList<CAccount> ilUser = new List<CAccount>();
 
 			try
 			{
 				IDictionary<string, object> iDic = new Dictionary<string, object>();
-				iDic.Add("EMP.search_text", strSearch_);
+				iDic.Add("search_text", strSearch_);
 
-				ilUser = DaoManager.Instance.QueryForList<CEmp>("EMP.select_emp_list", iDic);
+				ilUser = DaoManager.Instance.QueryForList<CAccount>("ACCOUNT.select_account_list", iDic);
 			}
 			catch (Exception ex)
 			{
@@ -30,24 +30,24 @@ namespace DAO
 			return ilUser;
 		}
 
-		public CEmp getEmp(IDictionary<string, object> dic)
+		public CAccount getAcount(IDictionary<string, object> dic)
 		{
-			return DaoManager.Instance.QueryForObject<CEmp>("EMP.select_emp", dic);
+			return DaoManager.Instance.QueryForObject<CAccount>("ACCOUNT.select_account", dic);
 		}
 
-		public CEmp getEmp(int idx)
+		public CAccount getAcount(int idx)
 		{
 			IDictionary<string, object> iDic = new Dictionary<string, object>();
 			iDic.Add("idx", idx);
-			return DaoManager.Instance.QueryForObject<CEmp>("EMP.select_emp", idx);
+			return DaoManager.Instance.QueryForObject<CAccount>("ACCOUNT.select_account", idx);
 		}
 
-		public CEmp getEmp(string id, string passwd)
+		public CAccount getAcount(string id, string passwd)
 		{
 			IDictionary<string, object> iDic = new Dictionary<string, object>();
 			iDic.Add("id", id);
 			iDic.Add("passwd", passwd);
-			return getEmp( iDic );
+			return getAcount(iDic);
 		}
 		/*
 		public CEmp getEmp(string emp_no, string passwd)
@@ -59,21 +59,21 @@ namespace DAO
 		}
 		*/
 
-		public void setEmp(CEmp emp)
+		public void setAccount(CAccount acount)
 		{
-			if (emp.idx == null || emp.idx == 0)
+			if (acount.idx == 0)
 			{
-				DaoManager.Instance.Insert("EMP.insert_emp", emp);
+				DaoManager.Instance.Insert("ACCOUNT.insert_account", acount);
 			}
 			else
 			{
-				DaoManager.Instance.Update("EMP.update_emp", emp);
+				DaoManager.Instance.Update("ACCOUNT.update_account", acount);
 			}
 		}
 
-		public void delEmp(int idx)
+		public void delAccount(int idx)
 		{
-			DaoManager.Instance.Delete("EMP.delete_emp", idx );
+			DaoManager.Instance.Delete("ACCOUNT.delete_account", idx);
 		}
 
 	}

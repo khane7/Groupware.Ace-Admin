@@ -1,5 +1,5 @@
 ﻿@{
-	var bootstrap_themes = "ace-v1.2--bs-v3.0.0";
+	var bootstrap_themes = "ace-v1.2--bs-v3.2.0";
 	
 	if ( Session["emp_no"] == null || Session["emp_no"] == "" )
 	{
@@ -9,8 +9,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta charset="utf-8" />
     <title>@ViewBag.Title</title>
+	<meta name="description" content="Restyling jQuery UI Widgets and Elements" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
 	<!--jquery-->
 	@Styles.Render("~/Content/css")
 	@Scripts.Render("~/bundles/modernizr")
@@ -26,7 +30,7 @@
 	<!-- START : Bootstrap Templete -->
 		<!-- basic styles -->
 
-		<link href="~/Bootstrap/@bootstrap_themes/assets/css/bootstrap.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/bootstrap.min.css" />
 		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/font-awesome.min.css" />
 
 		<!--[if IE 7]>
@@ -34,13 +38,9 @@
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
-		
-		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/jquery-ui-1.10.3.full.min.css" />
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/jquery-ui-1.10.3.full.min.js"></script>
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/jquery.ui.touch-punch.min.js"></script>
+		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/jquery-ui.min.css" />
 
 		<!-- fonts -->
-
 		<link rel="stylesheet" href="~/Bootstrap/@bootstrap_themes/assets/css/ace-fonts.css" />
 
 		<!-- ace styles -->
@@ -72,7 +72,7 @@
 
 
 </head>
-<body>
+<body class="no-skin">
 
 	<div class="navbar navbar-default" id="navbar">
 		@{
@@ -90,7 +90,7 @@
 				<span class="menu-text"></span>
 			</a>
 
-			<div class="sidebar" id="sidebar">
+			<div class="sidebar responsive" id="sidebar">
 				@{
 					Html.RenderAction("Index", "Left");
 				}
@@ -208,42 +208,36 @@
 	@RenderSection("scripts", required: false)
 
 
-	<!-- START : Bootstrap Templete -->
-		<!-- basic scripts -->
+	<!-- basic scripts -->
 
-		<!--[if !IE]> -->
+	<!--[if !IE]> -->
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery.min.js'>" + "<" + "/script>");
+	</script>
 
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
-		</script>
+	<!-- <![endif]-->
 
-		<!-- <![endif]-->
+	<!--[if IE]>
+	<script type="text/javascript">
+		window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery1x.min.js'>"+"<"+"/script>");
+	</script>
+	<![endif]-->
+	<script type="text/javascript">
+		if ('ontouchstart' in document.documentElement) document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+	</script>
+	<script src="~/Bootstrap/@bootstrap_themes/assets/js/bootstrap.min.js"></script>
 
-		<!--[if IE]>
-		<script type="text/javascript">
-		 window.jQuery || document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-		</script>
-		<![endif]-->
+	<!-- page specific plugin scripts -->
+	<script src="~/Bootstrap/@bootstrap_themes/assets/js/jquery-ui.min.js"></script>
+	<script src="~/Bootstrap/@bootstrap_themes/assets/js/jquery.ui.touch-punch.min.js"></script>
 
-		<script type="text/javascript">
-			if ("ontouchend" in document) document.write("<script src='~/Bootstrap/@bootstrap_themes/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
-		</script>
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/bootstrap.min.js"></script>
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/typeahead-bs2.min.js"></script>
+	<!-- ace scripts -->
+	<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace-elements.min.js"></script>
+	<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace.min.js"></script>
 
-		<!-- page specific plugin scripts -->
-
-		<!-- ace scripts -->
-
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace-elements.min.js"></script>
-		<script src="~/Bootstrap/@bootstrap_themes/assets/js/ace.min.js"></script>
-
-		<!-- inline scripts related to this page -->
-	<!-- END : Bootstrap Templete -->
+	@RenderPage("~/Views/Common/Dialog/AlertDialog.cshtml")
+	@RenderPage("~/Views/Common/Dialog/EmpDialog.cshtml")
 
 </body>
-
-@RenderPage("~/Views/Common/Dialog/AlertDialog.cshtml")
-@RenderPage("~/Views/Common/Dialog/EmpDialog.cshtml")
 
 </html>

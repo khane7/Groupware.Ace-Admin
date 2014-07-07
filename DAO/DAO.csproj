@@ -22,6 +22,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,7 +62,7 @@
     <Compile Include="DaoManager.cs" />
     <Compile Include="Maps\CMS\DaoCms.cs" />
     <Compile Include="Maps\COMMAND\DaoCommand.cs" />
-    <Compile Include="Maps\COMMON\DaoEmp.cs" />
+    <Compile Include="Maps\COMMON\DaoAccount.cs" />
     <Compile Include="Maps\COMMON\DaoCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -90,7 +91,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Maps\COMMON\tb_emp.xml">
+    <EmbeddedResource Include="Maps\COMMON\tb_account.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

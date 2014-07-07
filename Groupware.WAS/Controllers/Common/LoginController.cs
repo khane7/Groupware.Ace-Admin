@@ -26,9 +26,9 @@ namespace Groupware.Base.Controllers.common
 			JObject jsonObj = new JObject();
 			string strId = Request.Form["id"];
 
-			DaoEmp daoEmp = new DaoEmp();
+			DaoAccount daoAcount = new DaoAccount();
 
-			CEmp emp = daoEmp.getEmp(Request.Form["id"], Request.Form["passwd"]);
+			CAccount emp = daoAcount.getAcount(Request.Form["id"], Request.Form["passwd"]);
 			if (emp == null)
 			{
 				jsonObj.Add("RESULT", "FAIL");
@@ -43,7 +43,7 @@ namespace Groupware.Base.Controllers.common
 			return jsonObj;
 		}
 
-		public void LoginProcess( CEmp emp )
+		public void LoginProcess( CAccount emp )
 		{
 			Session["idx"] = emp.idx;
 			Session["emp_no"] = emp.emp_no;

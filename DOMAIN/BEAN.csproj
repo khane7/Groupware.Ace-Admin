@@ -45,7 +45,7 @@
     <Compile Include="COMMON\CComment.cs" />
     <Compile Include="COMMAND\CCommandEmp.cs" />
     <Compile Include="COMMON\CAttach.cs" />
-    <Compile Include="COMMON\CEmp.cs" />
+    <Compile Include="COMMON\CAccount.cs" />
     <Compile Include="COMMON\CCode.cs" />
     <Compile Include="COMMON\CEmpDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

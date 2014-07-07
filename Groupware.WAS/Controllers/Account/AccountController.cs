@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,6 +21,8 @@ namespace Groupware.Base.Controllers.Account
 		{
 			try
 			{
+
+				IList<CAccount> listEmp = new DaoAccount().getAcountList(null);
 
 			}
 			catch (Exception e)

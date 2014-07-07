@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 
-<sqlMap namespace="EMP" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
+<sqlMap namespace="ACCOUNT" xmlns="http://ibatis.apache.org/mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" >
 
 	<statements>
 
-		<select id="EMP.select_emp_list" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
+		<select id="ACCOUNT.select_account_list" resultClass="CAccount" parameterClass="System.Collections.Specialized.HybridDictionary">
 			SELECT 
 				A.*,
 				B.*,
@@ -13,7 +13,7 @@
 				(SELECT tree_key FROM tb_code WHERE tree_code = B.department_cd) AS department_name,
 				(SELECT tree_key FROM tb_code WHERE tree_code = B.position_cd) AS position_name
 			FROM
-				tb_emp AS A
+				tb_account AS A
 				LEFT JOIN     tb_emp_detail AS B ON A.emp_no = B.emp_no
 			<dynamic prepend="WHERE">
 				<isNotEmpty prepend="AND" property="search_text" >
@@ -22,7 +22,7 @@
 			</dynamic>
 		</select>
 
-		<select id="EMP.select_emp" resultClass="CEmp" parameterClass="System.Collections.Specialized.HybridDictionary">
+		<select id="ACCOUNT.select_account" resultClass="CAccount" parameterClass="System.Collections.Specialized.HybridDictionary">
 			SELECT 
 				A.*,
 				B.*,
@@ -31,7 +31,7 @@
 				(SELECT tree_key FROM tb_code WHERE tree_code = B.department_cd) AS department_name,
 				(SELECT tree_key FROM tb_code WHERE tree_code = B.position_cd) AS position_name
 			FROM
-				tb_emp AS A
+				tb_account AS A
 				LEFT JOIN     tb_emp_detail AS B ON A.emp_no = B.emp_no
 			<dynamic prepend="WHERE">
 				<isNotNull prepend="AND" property="idx">
@@ -52,9 +52,9 @@
 			</dynamic>
 		</select>
 
-		<insert id="EMP.insert_emp" parameterClass="CEmp">
+		<insert id="ACCOUNT.insert_account" parameterClass="CAccount">
 			INSERT INTO
-			tb_emp
+			tb_account
 			(
 				id,
 				name,
@@ -78,9 +78,9 @@
 			)
 		</insert>
 
-		<update id="EMP.update_emp" parameterClass="CEmp">
+		<update id="ACCOUNT.update_account" parameterClass="CAccount">
 			UPDATE
-				tb_emp
+				tb_account
 			SET
 				name = #name#,
 				passwd = #passwd#,
@@ -93,10 +93,10 @@
 				idx = #idx#
 		</update>
 
-		<delete id="EMP.delete_emp" parameterClass="System.Int32">
+		<delete id="ACCOUNT.delete_account" parameterClass="System.Int32">
 			DELETE
 			FROM
-				tb_emp
+				tb_account
 			WHERE
 				idx = #idx#
 		</delete>
